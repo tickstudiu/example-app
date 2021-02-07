@@ -6,7 +6,7 @@ use App\ContactRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Mailer;
-use App\Models\Contact;
+use App\Models\Inquiry;
 
 class ContactController extends Controller
 {
@@ -45,15 +45,15 @@ class ContactController extends Controller
             "body"  => $request->message
         ];
 
-        // create contact information
-        $contact = new Contact();
-        $contact->name = $request->name;
-        $contact->message = $request->message;
-        $contact->email = $request->email;
-        $contact->mobile_number = $request->mobile_number;
+        // create inquiry information
+        $inquiry = new Inquiry();
+        $inquiry->name = $request->name;
+        $inquiry->message = $request->message;
+        $inquiry->email = $request->email;
+        $inquiry->mobile_number = $request->mobile_number;
 
-        // save contact
-        $contact->save();
+        // save inquiry
+        $inquiry->save();
 
         // send email
         Mail::to($details['to'])->send(new Mailer($details));
