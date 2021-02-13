@@ -6,6 +6,7 @@ import App from './views/app.vue'
 import Contact from './views/contact.vue'
 import Read from './views/inquiry/read.vue'
 import Create from './views/inquiry/create.vue'
+import Update from './views/inquiry/update.vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -18,5 +19,5 @@ Vue.use(IconsPlugin)
 
 const app = new Vue({
     el: '#app',
-    components: { App, Contact, Read, Create }
+    components: { App, Contact, Read, Create, Update }
 });

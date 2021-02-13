@@ -27,4 +27,11 @@ class PagesController extends Controller
     {
         return view('inquiry.create');
     }
+
+    public function inquiryUpdate()
+    {
+        $id = request()->get('id');
+        $inquiry = Inquiry::where('id', $id)->get();
+        return view('inquiry.update', ['inquiry' => $inquiry]);
+    }
 }

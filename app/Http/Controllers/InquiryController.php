@@ -35,4 +35,26 @@ class InquiryController extends Controller
 
         echo 'done';
     }
+
+    public function change(Request $request)
+    {
+        // check validate input form
+        $request->validate([
+            'id'           => 'required|numeric',
+            'name'           => 'required|max:50',
+            'email'          => 'required|email|max:50',
+            'mobile_number'  => 'required|numeric',
+            'message'        => 'required|max:500',
+        ]);
+
+        // create inquiry information
+        Inquiry::where('id', $request->id)->update(array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile_number' => $request->mobile_number,
+            'message' => $request->message,
+        ));
+
+        echo 'done';
+    }
 }
