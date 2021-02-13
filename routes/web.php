@@ -17,14 +17,18 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\PagesController;
 
-Route::get('/contact', [ContactController::class, 'index']);
-Route::post('/contact', [ContactController::class, 'store']);
+//Route::get('/contact', [ContactController::class, 'index']);
+//Route::post('/contact', [ContactController::class, 'store']);
 
+// path web
 Route::get('/inquiry/read', [PagesController::class, 'inquiryRead']);
 Route::get('/inquiry/create', [PagesController::class, 'inquiryCreate']);
-Route::post('/inquiry/create', [InquiryController::class, 'store']);
 Route::get('/inquiry/update', [PagesController::class, 'inquiryUpdate']);
-Route::put('/inquiry/update', [InquiryController::class, 'change']);
-Route::delete('/inquiry/delete', [InquiryController::class, 'remove']);
+Route::get('/login', [PagesController::class, 'login']);
+
+// path action
+Route::post('/api/inquiry', [InquiryController::class, 'store']);
+Route::put('/api/inquiry', [InquiryController::class, 'change']);
+Route::delete('/api/inquiry', [InquiryController::class, 'remove']);
 
 Route::get('/{any}', 'App\Http\Controllers\PagesController@index')->where('any', '.*');

@@ -38,7 +38,7 @@ export default {
         },
 
         inquiryDelete(id, index){
-            axios.delete(`http://localhost:8000/inquiry/delete?id=${id}`, {
+            axios.delete(`http://localhost:8000/api/inquiry?id=${id}`, {
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }

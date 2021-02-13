@@ -17,6 +17,11 @@ class PagesController extends Controller
         return view('contact');
     }
 
+    public function login()
+    {
+        return view('login');
+    }
+
     public function inquiryRead()
     {
         $inquiry = Inquiry::all();

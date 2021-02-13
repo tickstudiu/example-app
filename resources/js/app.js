@@ -3,6 +3,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 //Main pages
 import App from './views/app.vue'
+import Login from './views/login.vue'
 import Contact from './views/contact.vue'
 import Read from './views/inquiry/read.vue'
 import Create from './views/inquiry/create.vue'
@@ -19,5 +20,5 @@ Vue.use(IconsPlugin)
 
 const app = new Vue({
     el: '#app',
-    components: { App, Contact, Read, Create, Update }
+    components: { App, Login, Contact, Read, Create, Update }
 });

@@ -53,7 +53,7 @@ export default {
         onSubmit(event) {
             event.preventDefault();
 
-            axios.put('http://localhost:8000/inquiry/update', this.form, {
+            axios.put('http://localhost:8000/api/inquiry', this.form, {
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }

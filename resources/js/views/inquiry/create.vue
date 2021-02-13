@@ -51,7 +51,7 @@ export default {
         onSubmit(event) {
             event.preventDefault();
 
-            axios.post('http://localhost:8000/inquiry/create', this.form, {
+            axios.post('http://localhost:8000/api/inquiry', this.form, {
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
@@ -65,6 +65,12 @@ export default {
                 })
             }).catch((error) => {
                 console.log(error);
+                this.$bvToast.toast('update failed', {
+                    title: 'Failed',
+                    autoHideDelay: 750,
+                    variant: 'danger',
+                    appendToast: false
+                })
             })
         }
     }
