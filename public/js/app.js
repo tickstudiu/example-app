@@ -2026,6 +2026,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -2041,18 +2053,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "read",
   props: ['inquiry'],
   data: function data() {
     return {
       perPage: 3,
-      currentPage: 1
+      currentPage: 1,
+      items: _toConsumableArray(this.inquiry),
+      fields: [{
+        key: 'id',
+        label: 'Action'
+      }, 'name', 'email', 'mobile_number', 'message']
     };
+  },
+  methods: {
+    inquiryUpdateRoute: function inquiryUpdateRoute(id) {
+      window.location.href = "http://localhost:8000/inquiry/update?id=".concat(id);
+    },
+    inquiryDelete: function inquiryDelete(id, index) {
+      var _this = this;
+
+      axios["delete"]("http://localhost:8000/inquiry/delete?id=".concat(id), {
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }).then(function (response) {
+        _this.items.splice(index, 1);
+
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   },
   computed: {
     rows: function rows() {
-      return this.inquiry.length;
+      return this.items.length;
     }
   }
 });
@@ -49147,8 +49191,43 @@ var render = function() {
           attrs: {
             "per-page": _vm.perPage,
             "current-page": _vm.currentPage,
-            items: _vm.inquiry
-          }
+            items: _vm.items,
+            fields: _vm.fields
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "cell(id)",
+              fn: function(data) {
+                return [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { size: "sm", variant: "success" },
+                      on: {
+                        click: function($event) {
+                          return _vm.inquiryUpdateRoute(data.value)
+                        }
+                      }
+                    },
+                    [_vm._v("update")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { size: "sm", variant: "danger" },
+                      on: {
+                        click: function($event) {
+                          return _vm.inquiryDelete(data.value, data.index)
+                        }
+                      }
+                    },
+                    [_vm._v("delete")]
+                  )
+                ]
+              }
+            }
+          ])
         }),
         _vm._v(" "),
         _c("b-pagination", {

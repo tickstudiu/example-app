@@ -47,13 +47,24 @@ class InquiryController extends Controller
             'message'        => 'required|max:500',
         ]);
 
-        // create inquiry information
+        // update inquiry information
         Inquiry::where('id', $request->id)->update(array(
             'name' => $request->name,
             'email' => $request->email,
             'mobile_number' => $request->mobile_number,
             'message' => $request->message,
         ));
+
+        echo 'done';
+    }
+
+    public function remove()
+    {
+
+        $id = request()->get('id');
+
+        // delete inquiry information
+        Inquiry::where('id', $id)->delete();
 
         echo 'done';
     }

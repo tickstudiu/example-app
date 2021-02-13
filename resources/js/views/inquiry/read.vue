@@ -3,7 +3,12 @@
         <section class="flex items-center flex-col">
             <b-table :per-page="perPage"
                      :current-page="currentPage"
-                     :items="inquiry"></b-table>
+                     :items="items" :fields="fields">
+                <template #cell(id)="data">
+                    <b-button size="sm" variant="success" @click="inquiryUpdateRoute(data.value)">update</b-button>
+                    <b-button size="sm" variant="danger" @click="inquiryDelete(data.value, data.index)">delete</b-button>
+                </template>
+            </b-table>
             <b-pagination
                 v-model="currentPage"
                 :total-rows="rows"
@@ -14,6 +19,8 @@
 </template>
 
 <script>
+const axios = require('axios');
+
 export default {
     name: "read",
     props: ['inquiry'],
@@ -21,11 +28,31 @@ export default {
         return {
             perPage: 3,
             currentPage: 1,
+            items: [...this.inquiry],
+            fields: [{ key: 'id', label: 'Action' },'name', 'email', 'mobile_number', 'message']
+        }
+    },
+    methods: {
+        inquiryUpdateRoute(id){
+            window.location.href = `http://localhost:8000/inquiry/update?id=${id}`
+        },
+
+        inquiryDelete(id, index){
+            axios.delete(`http://localhost:8000/inquiry/delete?id=${id}`, {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            }).then((response) => {
+                this.items.splice(index, 1)
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+            })
         }
     },
     computed: {
         rows() {
-            return this.inquiry.length
+            return this.items.length
         }
     }
 }
