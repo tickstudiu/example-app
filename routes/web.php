@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\PagesController;
 
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
+Route::get('/inquiry/read', [PagesController::class, 'inquiryRead']);
+Route::get('/inquiry/create', [PagesController::class, 'inquiryCreate']);
+Route::post('/inquiry/create', [InquiryController::class, 'store']);
 Route::get('/{any}', 'App\Http\Controllers\PagesController@index')->where('any', '.*');

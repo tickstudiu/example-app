@@ -6,7 +6,6 @@
 <script>
 const default_layout = "default";
 
-
 export default {
   computed: {},
   data() {
