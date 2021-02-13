@@ -2231,8 +2231,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "login"
+  name: "login",
+  data: function data() {
+    return {
+      form: {
+        username: '',
+        password: ''
+      }
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit(event) {
+      event.preventDefault();
+      axios.post("http://localhost:8000/api/user/auth", this.form, {
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }).then(function (response) {
+        window.location.href = 'http://localhost:8000/inquiry/read';
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -49571,7 +49614,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    login page\n")])
+  return _c(
+    "b-container",
+    [
+      _c(
+        "b-form",
+        { on: { submit: _vm.onSubmit } },
+        [
+          _c(
+            "b-form-group",
+            { attrs: { label: "username:" } },
+            [
+              _c("b-form-input", {
+                attrs: { placeholder: "Enter username", required: "" },
+                model: {
+                  value: _vm.form.username,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "username", $$v)
+                  },
+                  expression: "form.username"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            { attrs: { label: "password:" } },
+            [
+              _c("b-form-input", {
+                attrs: { type: "password", required: "" },
+                model: {
+                  value: _vm.form.password,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "password", $$v)
+                  },
+                  expression: "form.password"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-button", { attrs: { type: "submit", variant: "primary" } }, [
+            _vm._v("Submit")
+          ]),
+          _vm._v(" "),
+          _c("b-button", { attrs: { type: "reset", variant: "danger" } }, [
+            _vm._v("Reset")
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
