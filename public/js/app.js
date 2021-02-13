@@ -1999,6 +1999,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
   computed: {},
   methods: {
     onSubmit: function onSubmit(event) {
+      var _this = this;
+
       event.preventDefault();
       axios.post('http://localhost:8000/inquiry/create', this.form, {
         headers: {
@@ -2006,6 +2008,13 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
         }
       }).then(function (response) {
         console.log(response);
+
+        _this.$bvToast.toast("created inquiry", {
+          title: 'Created',
+          autoHideDelay: 750,
+          variant: 'success',
+          appendToast: false
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2088,6 +2097,13 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       }).then(function (response) {
         _this.items.splice(index, 1);
 
+        _this.$bvToast.toast("delete inquiry id ".concat(id), {
+          title: 'Deleted',
+          autoHideDelay: 750,
+          variant: 'success',
+          appendToast: false
+        });
+
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -2166,6 +2182,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
   computed: {},
   methods: {
     onSubmit: function onSubmit(event) {
+      var _this = this;
+
       event.preventDefault();
       axios.put('http://localhost:8000/inquiry/update', this.form, {
         headers: {
@@ -2173,6 +2191,13 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
         }
       }).then(function (response) {
         console.log(response);
+
+        _this.$bvToast.toast("updated inquiry", {
+          title: 'Updated',
+          autoHideDelay: 750,
+          variant: 'success',
+          appendToast: false
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -49190,6 +49215,7 @@ var render = function() {
         _c("b-table", {
           attrs: {
             "per-page": _vm.perPage,
+            responsive: true,
             "current-page": _vm.currentPage,
             items: _vm.items,
             fields: _vm.fields

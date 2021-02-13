@@ -59,6 +59,12 @@ export default {
                 }
             }).then((response) => {
                 console.log(response);
+                this.$bvToast.toast(`updated inquiry`, {
+                    title: 'Updated',
+                    autoHideDelay: 750,
+                    variant: 'success',
+                    appendToast: false
+                })
             }).catch((error) => {
                 console.log(error);
             })

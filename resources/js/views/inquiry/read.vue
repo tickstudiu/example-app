@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <section class="flex items-center flex-col">
-            <b-table :per-page="perPage"
+            <b-table :per-page="perPage" :responsive="true"
                      :current-page="currentPage"
                      :items="items" :fields="fields">
                 <template #cell(id)="data">
@@ -44,6 +44,12 @@ export default {
                 }
             }).then((response) => {
                 this.items.splice(index, 1)
+                this.$bvToast.toast(`delete inquiry id ${id}`, {
+                    title: 'Deleted',
+                    autoHideDelay: 750,
+                    variant: 'success',
+                    appendToast: false
+                })
                 console.log(response)
             }).catch((error) => {
                 console.log(error)
